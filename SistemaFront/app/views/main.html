@@ -1,0 +1,122 @@
+﻿
+<div class="container">
+    <div class="jumbotron">
+        <div class="panel panel-default">
+            <h1 class="text-center">Sistema Empresa Fornecedor</h1>
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarEmpresa">Cadastrar Empresa</button>
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarFornecedor">Cadastrar Fornecedor</button>
+            <br />
+            <div class="panel-body"></div>
+            <div>
+                <br />
+                <h1>{{Empresa.NomeFantasia}}</h1>
+                <br />
+                <table class="table col-md-12">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Fornecedores</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="Fornecedor in FornecedorList track by $index">
+                            <td>{{Fornecedor.Nome}}</td>
+                            <td>
+                                <div class="row">
+                                    <button type="button" class="btn btn-sm btn-outline-dark col-sm-6">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-dark col-sm-6">
+                                        <i class="fas fa-user"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalAdicionarEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrar Empresa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group">
+                        <label>Nome Fantasia</label>
+                        <input class="form-control" rows="3" placeholder="Nome Fantasia" ng-model="Empresa.NomeFantasia">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <input type="text" class="form-control" placeholder="SIGLA DO ESTADO" ng-model="Empresa.UF">
+                    </div>
+
+                    <div class="form-group">
+                        <label>CNPJ</label>
+                        <input type="text" class="form-control" placeholder="CNPJ" ng-model="Empresa.CNPJ">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-outline-dark" ng-click="CadastrarEmpresa(Empresa)">Adicionar Empresa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalAdicionarFornecedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Novo Fornecedor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+
+                    <div class="form-group">
+                        <label>Empresa</label>
+                        <input type="text" class="form-control" placeholder="Empresa Vinculada" ng-model="Fornecedor.EmpresaID">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nome do Fornecedor</label>
+                        <input type="text" class="form-control" placeholder="Nome do Fornecedor" ng-model="Fornecedor.Nome">
+                    </div>
+
+                    <div class="form-group">
+                        <label>CPF/CNPJ</label>
+                        <input type="text" class="form-control" placeholder="Documento" ng-model="Fornecedor.Documento">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data do Cadastro</label>
+                        <input type="date" class="form-control" ng-model="Fornecedor.DtCadastro">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="text" class="form-control" placeholder="Telefone" ng-model="Fornecedor.Telefone">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-outline-dark" ng-click="CadastrarFornecedor(Fornecedor)">Adicionar Fornecedor</button>
+            </div>
+        </div>
+    </div>
+</div>

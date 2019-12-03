@@ -10,7 +10,7 @@ namespace SistemaEmpresa.Controllers
     public class EmpresaController : ApiController
     {
         [HttpPost]
-        public HttpResponseMessage CadastrarEmpresa(Empresa empresa)
+        public HttpResponseMessage CadastrarEmpresa([FromBody]Empresa empresa)
         {
             try
             {
