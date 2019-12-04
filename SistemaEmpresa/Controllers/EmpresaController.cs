@@ -21,5 +21,18 @@ namespace SistemaEmpresa.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+
+        [HttpGet]
+        public HttpResponseMessage BuscarEmpresa(int idEmpresa)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, EmpresaNeg.BuscarEmpresa(idEmpresa));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
     }
 }

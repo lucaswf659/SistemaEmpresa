@@ -1,6 +1,7 @@
 ﻿using SistemaDados;
 using SistemaModelos;
 using System;
+using System.Collections.Generic;
 
 namespace SistemaNegocio
 {
@@ -11,6 +12,18 @@ namespace SistemaNegocio
             try
             {
                 return FornecedorDD.CadastrarFornecedor(fornecedor);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static List<Fornecedor> BuscarListaFornecedores(int idEmpresa)
+        {
+            try
+            {
+                return FornecedorDD.BuscarListaFornecedores(int idEmpresa);
             }
             catch (Exception ex)
             {

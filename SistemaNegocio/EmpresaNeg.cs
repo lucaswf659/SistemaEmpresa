@@ -17,5 +17,17 @@ namespace SistemaNegocio
                 throw ex;
             }
         }
+
+        public static Empresa BuscarEmpresa(int idEmpresa)
+        {
+            try
+            {
+                return EmpresaDD.BuscarEmpresa(idEmpresa);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

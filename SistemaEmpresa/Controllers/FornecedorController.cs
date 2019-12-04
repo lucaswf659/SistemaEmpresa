@@ -21,5 +21,18 @@ namespace SistemaEmpresa.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+
+        [HttpGet]
+        public HttpResponseMessage BuscarListaFornecedores(Fornecedor fornecedor)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, FornecedorNeg.BuscarListaFornecedores(fornecedor));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
     }
 }

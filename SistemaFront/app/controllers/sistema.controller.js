@@ -6,10 +6,14 @@ SistemaCtrl.$inject = ['$scope', 'SistemaService'];
 function SistemaCtrl($scope, SistemaService)
 {
     inicializaDadosSistemaCtrl();
-    //BuscarSistema();
+    BuscarEmpresa();
 
     function inicializaDadosSistemaCtrl() {
-        
+        $scope.Empresa = {
+            NomeFantasia: '',
+            UF: '',
+            CNPJ: ''
+        }
     };
 
     $scope.CadastrarEmpresa = function () {
@@ -22,13 +26,22 @@ function SistemaCtrl($scope, SistemaService)
             });
     };
 
+    function BuscarEmpresa()  {
+        SistemaService.BuscarEmpresa()
+            .then(function (responseSucess) {
+                $scope.Empresa.NomeFantasia = responseSucess.data.NomeFantasia;
+            }, function (errorResponse) {
+
+                var error = errorResponse.message;
+            });
+    };
 
     $scope.CadastrarFornecedor = function () {
 
         //get empresa
-        if ($scope.Empresa.UF == "PR") {
+        //if ($scope.Empresa.UF == "PR") {
             //ver se é menor de idade, se for nao deixar cadastrar
-        }
+        //}
 
         SistemaService.CadastrarFornecedor($scope.Fornecedor)
             .then(function (responseSucess) {
@@ -41,27 +54,7 @@ function SistemaCtrl($scope, SistemaService)
             });
     };
 
-    function BuscarSistema() {
-
-        SistemaService.BuscarSistema()
-            .then(function (responseSucess) {
-
-
-
-            }, function (errorResponse) {
-
-                var error = errorResponse.message;
-            });
-    }
-
-    function formatDate(timestamp) {
-        var x = new Date(timestamp);
-        var dd = x.getDate();
-        var mm = x.getMonth() + 1;
-        var yy = x.getFullYear();
-        //var hh = x.getHours();
-        return dd + "/" + mm + "/" + yy;
-    }
+   
 }
 
   
