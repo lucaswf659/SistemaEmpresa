@@ -21,6 +21,7 @@ namespace SistemaDados
 
                     command.Parameters.AddWithValue("@nome", fornecedor.Nome ?? string.Empty);
                     command.Parameters.AddWithValue("@rg", fornecedor.RG ?? string.Empty);
+                    command.Parameters.AddWithValue("@Documento", fornecedor.Documento ?? string.Empty);
                     command.Parameters.AddWithValue("@dt_cadastro", fornecedor.DtCadastro == null ? (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue : fornecedor.DtCadastro);
                     command.Parameters.AddWithValue("@dt_nascimento", fornecedor.DtNascimento == null ? (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue : fornecedor.DtNascimento);
                     command.Parameters.AddWithValue("@telefone", fornecedor.Telefone ?? string.Empty);
@@ -46,7 +47,7 @@ namespace SistemaDados
 
         }
 
-        public static List<Fornecedor> BuscarListaFornecedores(int idEmpresa)
+        public static List<Fornecedor> BuscarFornecedorList(FornecedorFiltro fornecedorFiltro)
         {
             try
             {
@@ -59,8 +60,11 @@ namespace SistemaDados
                     SqlCommand command = new SqlCommand("[dbo].[buscar_lista_fornecedores]", connection);
                     command.CommandType = CommandType.StoredProcedure;
 
-
-                    command.Parameters.AddWithValue("@idEmpresa", idEmpresa == 0 ? idEmpresa = 1 : idEmpresa);
+                    command.Parameters.AddWithValue("@idEmpresa", fornecedorFiltro.IdEmpresa == 0 ? fornecedorFiltro.IdEmpresa = 1 : fornecedorFiltro.IdEmpresa);
+                    //command.Parameters.AddWithValue("@nome", fornecedorFiltro.Nome ?? string.Empty);
+                    //command.Parameters.AddWithValue("@Documento", fornecedorFiltro.Documento ?? string.Empty);
+                    //command.Parameters.AddWithValue("@dt_cadastro", fornecedorFiltro.DtCadastro == null ? (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue : fornecedorFiltro.DtCadastro);
+                 
 
                     connection.Open();
 
@@ -73,24 +77,73 @@ namespace SistemaDados
                             {
                                 Fornecedor fornecedor = new Fornecedor()
                                 {
-                                    Nome = reader.GetString(0),
-                                    Documento = reader.GetString(1),
-                                    RG = reader.GetString(2),
-                                    DtCadastro = reader.GetDateTime(3),
-                                    DtNascimento = reader.GetDateTime(4),
-                                    Telefone = reader.GetString(5)
+                                    Nome = reader.IsDBNull(0) ? null : reader.GetString(0),
+                                    Documento = reader.IsDBNull(1) ? null : reader.GetString(1),
+                                    RG = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                    DtCadastro = reader.IsDBNull(3) ? DateTime.MinValue : reader.GetDateTime(3),
+                                    DtNascimento = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4),
+                                    Telefone = reader.IsDBNull(5) ? null : reader.GetString(5)
                                 };
+
                                 listaFornecedores.Add(fornecedor);
                             }
                         }
                         else
                         {
-                            return null;
+                           throw new ApplicationException("Não foram encontrados dados válidos");
                         }
                     }
                 }
 
                 return listaFornecedores;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static Fornecedor BuscarFornecedor(int idFornecedor)
+        {
+            try
+            {
+
+                Fornecedor fornecedor = new Fornecedor();
+
+                using (SqlConnection connection = new SqlConnection("Server=DESKTOP-O734NVQ\\SQLEXPRESS;Database=SistemaEmpresa;Trusted_Connection=True;"))
+                {
+
+                    SqlCommand command = new SqlCommand("[dbo].[buscar_fornecedor]", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+
+                    command.Parameters.AddWithValue("@idFornecedor", idFornecedor == 0 ? idFornecedor = 1 : idFornecedor);
+
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                fornecedor.Nome = reader.IsDBNull(0) ? null : reader.GetString(0);
+                                fornecedor.Documento = reader.IsDBNull(1) ? null : reader.GetString(1);
+                                fornecedor.RG = reader.IsDBNull(2) ? null : reader.GetString(2);
+                                fornecedor.DtCadastro = reader.IsDBNull(3) ? DateTime.MinValue : reader.GetDateTime(3);
+                                fornecedor.DtNascimento = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4);
+                                fornecedor.Telefone = reader.IsDBNull(5) ? null : reader.GetString(5);
+                            }
+                        }
+                        else
+                        {
+                           throw new ApplicationException("Fornecedor não encontrado.");
+                        }
+                    }
+                }
+
+                return fornecedor;
             }
             catch (Exception ex)
             {

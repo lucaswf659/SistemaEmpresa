@@ -10,18 +10,21 @@ function SistemaService($http) {
         return $http.post('http://localhost:60791/api/Empresa/CadastrarEmpresa', $scope);
     };
 
-    this.BuscarEmpresa = function () {
-        return $http.get('http://localhost:60791/api/Empresa/BuscarEmpresa?idEmpresa=' + '0');
+    this.BuscarEmpresa = function ($scope) {
+        return $http.post('http://localhost:60791/api/Empresa/BuscarEmpresa', $scope);
     };
 
     this.CadastrarFornecedor = function ($scope) {
         return $http.post('http://localhost:60791/api/Fornecedor/CadastrarFornecedor', $scope);
     };
 
-    this.BuscarFornecedoresList = function ($scope) {
-        return $http.get('http://localhost:60791/api/Fornecedor/BuscarFornecedoresList', $scope);
+    this.BuscarFornecedorList = function ($scope) {
+        return $http.post('http://localhost:60791/api/Fornecedor/BuscarFornecedorList', $scope);
     };
 
+    this.CadastrarEmpresaFornecedor = function ($scope) {
+        return $http.post('http://localhost:60791/api/EmpresaFornecedor/CadastrarEmpresaFornecedor', $scope);
+    };
 
     var self = this;
 }

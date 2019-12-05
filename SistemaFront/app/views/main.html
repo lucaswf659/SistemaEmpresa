@@ -3,40 +3,104 @@
     <div class="jumbotron">
         <div class="panel panel-default">
             <h1 class="text-center">Sistema Empresa Fornecedor</h1>
-            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarEmpresa">Cadastrar Empresa</button>
-            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarFornecedor">Cadastrar Fornecedor</button>
             <br />
-            <div class="panel-body"></div>
             <div>
-                <br />
+                <row>
+                    <label>Código da empresa</label>
+                    <input type="text" class="col-md-3" placeholder="Informe o código da empresa" ng-model="Empresa.IdEmpresa">
+                    <button type="button" class="btn btn-outline-dark" ng-click="BuscarEmpresa()">Buscar Empresa</button>
+                </row>
+            </div>
+
+            <br />
+          
+            <div>
+                <div>
+                    <row>
+                        <label>Nome</label>
+                        <input type="text" class="col-md-3" placeholder="Nome do fornecedor">
+                    </row>
+                </div>
+                <div>
+                    <row>
+                        <label>CPF/CNPJ</label>
+                        <input type="text" class="col-md-3" placeholder="Informe o código da empresa">
+                    </row>
+                </div>
+
+                <div>
+                    <row>
+                        <label>Data de Cadastro</label>
+                        <input type="date" class="col-md-3" placeholder="Informe o código da empresa">
+                    </row>
+                </div>
+                <button type="button" class="btn btn-outline-dark" ng-click="">Filtrar Fornecedor</button>
+                <br/>
+                <br/>
                 <h1>{{Empresa.NomeFantasia}}</h1>
                 <br />
                 <table class="table col-md-12">
+                    <h1 scope="col">Fornecedores</h1>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Fornecedores</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">RG</th>
+                            <th scope="col">Data do Cadastro</th>
+                            <th scope="col">Data de nascimento</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="Fornecedor in FornecedorList track by $index">
                             <td>{{Fornecedor.Nome}}</td>
-                            <td>
-                                <div class="row">
-                                    <button type="button" class="btn btn-sm btn-outline-dark col-sm-6">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-outline-dark col-sm-6">
-                                        <i class="fas fa-user"></i>
-                                    </button>
-                                </div>
-                            </td>
+                            <td>{{Fornecedor.Documento}}</td>
+                            <td>{{Fornecedor.Telefone}}</td>
+                            <td>{{Fornecedor.RG}}</td>
+                            <td>{{Fornecedor.DtCadastro}}</td>
+                            <td>{{Fornecedor.DtNascimento}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarEmpresa">Cadastrar Empresa</button>
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarFornecedor">Cadastrar Fornecedor</button>
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalVincularEmpresaFornecedor">Cadastrar Fornecedor na Empresa</button>
     </div>
 </div>
+
+<div class="modal fade" id="ModalVincularEmpresaFornecedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrar Fornecedor na Empresa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group">
+                        <label>Código da Empresa</label>
+                        <input class="form-control" rows="3" ng-model="EmpresaFornecedor.IdEmpresa">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Código do Fornecedor</label>
+                        <input type="text" class="form-control" ng-model="EmpresaFornecedor.IdFornecedor">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-outline-dark" ng-click="CadastrarEmpresaFornecedor(EmpresaFornecedor)" data-dismiss="modal">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="ModalAdicionarEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -68,7 +132,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-outline-dark" ng-click="CadastrarEmpresa(Empresa)">Adicionar Empresa</button>
+                <button type="submit" class="btn btn-outline-dark" ng-click="CadastrarEmpresa(Empresa)" data-dismiss="modal">Cadastrar Empresa</button>
             </div>
         </div>
     </div>
@@ -86,12 +150,6 @@
             <div class="modal-body">
 
                 <form>
-
-                    <div class="form-group">
-                        <label>Empresa</label>
-                        <input type="text" class="form-control" placeholder="Empresa Vinculada" ng-model="Fornecedor.EmpresaID">
-                    </div>
-
                     <div class="form-group">
                         <label>Nome do Fornecedor</label>
                         <input type="text" class="form-control" placeholder="Nome do Fornecedor" ng-model="Fornecedor.Nome">
@@ -108,14 +166,25 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Data de Nascimento</label>
+                        <input type="date" class="form-control" placeholder="Telefone" ng-model="Fornecedor.DtNascimento">
+                    </div>
+
+                    <div class="form-group">
                         <label>Telefone</label>
                         <input type="text" class="form-control" placeholder="Telefone" ng-model="Fornecedor.Telefone">
                     </div>
+
+                    <div class="form-group">
+                        <label>RG</label>
+                        <input type="text" class="form-control" placeholder="Telefone" ng-model="Fornecedor.RG">
+                    </div>
+
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-outline-dark" ng-click="CadastrarFornecedor(Fornecedor)">Adicionar Fornecedor</button>
+                <button type="submit" class="btn btn-outline-dark" ng-click="CadastrarFornecedor(Fornecedor)" data-dismiss="modal">Cadastrar Fornecedor</button>
             </div>
         </div>
     </div>

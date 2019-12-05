@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\EmpresaFornecedorController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -112,6 +113,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SistemaDados\SistemaDados.csproj">
+      <Project>{81451F5E-624C-455D-82BD-4965D0C11048}</Project>
+      <Name>SistemaDados</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SistemaModelos\SistemaModelos.csproj">
       <Project>{24AD4396-EACD-4F88-A2D2-F2BE8D4440FB}</Project>
       <Name>SistemaModelos</Name>

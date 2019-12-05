@@ -10,7 +10,7 @@ namespace SistemaEmpresa.Controllers
     public class FornecedorController : ApiController
     {
         [HttpPost]
-        public HttpResponseMessage CadastrarFornecedor(Fornecedor fornecedor)
+        public HttpResponseMessage CadastrarFornecedor([FromBody]Fornecedor fornecedor)
         {
             try
             {
@@ -22,12 +22,12 @@ namespace SistemaEmpresa.Controllers
             }
         }
 
-        [HttpGet]
-        public HttpResponseMessage BuscarListaFornecedores(Fornecedor fornecedor)
+        [HttpPost]
+        public HttpResponseMessage BuscarFornecedorList([FromBody]FornecedorFiltro fornecedorFiltro)
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, FornecedorNeg.BuscarListaFornecedores(fornecedor));
+                return Request.CreateResponse(HttpStatusCode.OK, FornecedorNeg.BuscarFornecedorList(fornecedorFiltro));
             }
             catch (Exception ex)
             {

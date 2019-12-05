@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmpresaFornecedorNeg.cs" />
     <Compile Include="EmpresaNeg.cs" />
     <Compile Include="FornecedorNeg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

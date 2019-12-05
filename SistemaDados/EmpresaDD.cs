@@ -76,7 +76,7 @@ namespace SistemaDados
                         }
                         else
                         {
-                            return null;
+                           throw new ApplicationException("Empresa não encontrada.");
                         }
                     }
                 }
