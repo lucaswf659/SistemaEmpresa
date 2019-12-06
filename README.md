@@ -13,7 +13,7 @@ Executar o script ScriptsSistemaEmpresa.sql no SQL Server.
 Abrir o arquivo SistemaEmpresa.sln no VisualStudio.  
 Na opção da Solution, ir na opção "Definir projeto de inicialização" e selecionar os projetos "SistemaAPI" e "SistemaFront" marcando-os como "Iniciar".  
 Clicar em "Iniciar" ou F5 para inicializar o projeto.  
-No projeto "SistemaDados", alterar a string de conexão de todos os métodos (o ideal é deixar essa configuração em Settings.Properties do projeto, será alterado futuramente). A string de conexão é obtida no SQL Server. 
+No projeto "SistemaDados", alterar a string de conexão de todos os métodos (o ideal é deixar essa configuração na appsettings do projeto, será alterado futuramente). A string de conexão é obtida no SQL Server. 
 
 ### Implementações Futuras
 
