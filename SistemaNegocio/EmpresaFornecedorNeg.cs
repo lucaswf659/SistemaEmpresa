@@ -28,7 +28,7 @@ namespace SistemaNegocio
 
                 if (empresa.UF == "PR") 
                     if (fornecedor.Documento.Length == 11) 
-                        if(fornecedor.DtNascimento < DateTime.Now.AddYears(-18))
+                        if(fornecedor.DtNascimento >= DateTime.Now.AddYears(-18))
                             throw new ApplicationException("A empresa é do Paraná, portanto não aceita fornecedores PESSOA FÍSICA menores de idade.");
                         
                 return EmpresaFornecedorDD.CadastrarEmpresaFornecedor(empresaFornecedor);

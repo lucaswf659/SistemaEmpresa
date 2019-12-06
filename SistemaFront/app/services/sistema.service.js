@@ -10,10 +10,6 @@ function SistemaService($http) {
         return $http.post('http://localhost:60791/api/Empresa/CadastrarEmpresa', $scope);
     };
 
-    this.BuscarEmpresa = function ($scope) {
-        return $http.post('http://localhost:60791/api/Empresa/BuscarEmpresa', $scope);
-    };
-
     this.CadastrarFornecedor = function ($scope) {
         return $http.post('http://localhost:60791/api/Fornecedor/CadastrarFornecedor', $scope);
     };

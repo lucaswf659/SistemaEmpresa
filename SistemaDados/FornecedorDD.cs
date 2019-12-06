@@ -71,8 +71,6 @@ namespace SistemaDados
                     if (!string.IsNullOrWhiteSpace(fornecedorFiltro.Documento))
                         command.Parameters.Add("@Documento", SqlDbType.NVarChar).Value = fornecedorFiltro.Documento;
 
-                   
-                 
                     connection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -95,21 +93,22 @@ namespace SistemaDados
                                 listaFornecedores.Add(fornecedor);
                             }
                         }
-                        else
-                        {
-                            throw new ApplicationException("Não foram encontrados dados válidos");
-                        }
                     }
                 }
 
-               
-
-
+                if (listaFornecedores.Count == 0)
+                {
+                    Fornecedor fornecedor = new Fornecedor()
+                    {
+                        empresa = EmpresaDD.BuscarEmpresa(fornecedorFiltro.IdEmpresa)
+                    };
+                    listaFornecedores.Add(fornecedor);
+                }
                 return listaFornecedores;
             }
-            catch (Exception ex)
+            catch 
             {
-                throw ex;
+                throw new ApplicationException("Não foram encontrados dados válidos");
             }
         }
 

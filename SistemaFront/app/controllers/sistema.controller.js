@@ -32,9 +32,9 @@ function SistemaCtrl($scope, SistemaService)
         SistemaService.CadastrarEmpresa($scope.Empresa)
             .then(function (responseSucess) {
                 BuscarFornecedorList();
+                toastr.success("Empresa cadastrada com sucesso!");
             }, function (errorResponse) {
-
-                var error = errorResponse.message;
+                toastr.error(errorResponse.data.Message);
             });
     };
 
@@ -42,32 +42,22 @@ function SistemaCtrl($scope, SistemaService)
         SistemaService.CadastrarFornecedor($scope.Fornecedor)
             .then(function (responseSucess) {
                 BuscarFornecedorList();
+                toastr.success("Fornecedor cadastrado com sucesso!");
             }, function (errorResponse) {
-
-                var error = errorResponse.message;
+                toastr.error(errorResponse.data.Message);
             });
     };
 
     $scope.CadastrarEmpresaFornecedor = function () {
         SistemaService.CadastrarEmpresaFornecedor($scope.EmpresaFornecedor)
             .then(function (responseSucess) {
+                toastr.success("Lista atualizada");
                 BuscarFornecedorList();
             }, function (errorResponse) {
-
-                var error = errorResponse.message;
+                toastr.error(errorResponse.data.Message);
             });
     };
 
-    $scope.BuscarEmpresa = function() {
-        SistemaService.BuscarEmpresa($scope.Empresa)
-            .then(function (responseSucess) {
-                $scope.Empresa.NomeFantasia = responseSucess.data.NomeFantasia;
-                BuscarFornecedorList($scope.Empresa);
-            }, function (errorResponse) {
-
-                var error = errorResponse.message;
-            });
-    };
 
     $scope.BuscarFornecedorListFiltrado = function() {
         SistemaService.BuscarFornecedorList($scope.FornecedorFiltro)
@@ -82,10 +72,9 @@ function SistemaCtrl($scope, SistemaService)
                     if (item.DtNascimento == '1/1/1')
                         item.DtNascimento = undefined;
                 });
-                //toastr.success('Hello world!', 'Toastr fun!');
+                toastr.success("Lista atualizada");
             }, function (errorResponse) {
-                //toastr.error('Your credentials are gone', 'Error');
-                var error = errorResponse.message;
+                toastr.error(errorResponse.data.Message);
             });
     };
 
@@ -102,10 +91,9 @@ function SistemaCtrl($scope, SistemaService)
                     if (item.DtNascimento == '1/1/1')
                         item.DtNascimento = undefined;
                 });
-                //toastr.success('Hello world!', 'Toastr fun!');
+                toastr.success("Lista atualizada");
             }, function (errorResponse) {
-                //toastr.error('Your credentials are gone', 'Error');
-                var error = errorResponse.message;
+                toastr.error(errorResponse.data.Message);
             });
     };
 

@@ -22,17 +22,6 @@ namespace SistemaEmpresa.Controllers
             }
         }
 
-        [HttpPost]
-        public HttpResponseMessage BuscarEmpresa([FromBody] Empresa empresa)
-        {
-            try
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, EmpresaNeg.BuscarEmpresa(empresa.IdEmpresa));
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
-            }
-        }
+       
     }
 }

@@ -4,69 +4,64 @@
         <div class="panel panel-default">
             <h1 class="text-center">Sistema Empresa Fornecedor</h1>
             <br />
-     
-            <div>
-                <div>
-                    <row>
+            <form>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
                         <label>Código da empresa</label>
-                        <input type="text" class="col-md-3" placeholder="Informe o código da empresa" ng-model="FornecedorFiltro.IdEmpresa">
-                        <!--<button type="button" class="btn btn-outline-dark" >Buscar Empresa</button>-->
-                    </row>
-                </div>
-                <div>
-                    <row>
+                        <input type="text" class="form-control" placeholder="Código da empresa" ng-model="FornecedorFiltro.IdEmpresa">
+                    </div>
+                    <div class="col-md-6 mb-3">
                         <label>Nome</label>
-                        <input type="text" class="col-md-3" placeholder="Nome do fornecedor" ng-model="FornecedorFiltro.Nome">
-                    </row>
+                        <input type="text" class="form-control" placeholder="Nome do fornecedor" ng-model="FornecedorFiltro.Nome">
+                    </div>
                 </div>
-                <div>
-                    <row>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
                         <label>CPF/CNPJ</label>
-                        <input type="text" class="col-md-3" placeholder="CPF ou CNPJ" ng-model="FornecedorFiltro.Documento">
-                    </row>
-                </div>
+                        <input type="text" class="form-control" placeholder="Documento" ng-model="FornecedorFiltro.Documento">
 
-                <div>
-                    <row>
+                    </div>
+                    <div class="col-md-6 mb-3">
                         <label>Data de Cadastro</label>
-                        <input type="date" class="col-md-3" placeholder="Informe o código da empresa" ng-model="FornecedorFiltro.DtCadastro">
-                    </row>
+                        <input type="date" class="form-control" ng-model="FornecedorFiltro.DtCadastro">
+                    </div>
                 </div>
-                <button type="button" class="btn btn-outline-dark" ng-click="BuscarFornecedorListFiltrado()">Filtrar Fornecedor</button>
-                <br />
-                <br />
-                <br />
-                <h1>{{Empresa.NomeFantasia}}</h1>
-                <br />
-                <table class="table col-md-12">
-                    <h1 scope="col">Fornecedores</h1>
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Documento</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">RG</th>
-                            <th scope="col">Data do Cadastro</th>
-                            <th scope="col">Data de nascimento</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="Fornecedor in FornecedorList track by $index">
-                            <td>{{Fornecedor.Nome}}</td>
-                            <td>{{Fornecedor.Documento}}</td>
-                            <td>{{Fornecedor.Telefone}}</td>
-                            <td>{{Fornecedor.RG}}</td>
-                            <td>{{Fornecedor.DtCadastro}}</td>
-                            <td>{{Fornecedor.DtNascimento}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            </form>
+            <button type="button" class="btn btn-outline-dark float-right" ng-click="BuscarFornecedorListFiltrado()">Filtrar Fornecedor</button>
+            <br />
+            <br />
+            <br />
+            <h1 class="text-center">{{Empresa.NomeFantasia}}</h1>
+            <br />
+            <table class="table col-md-12">
+                <h1 scope="col">Fornecedores</h1>
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Documento</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">RG</th>
+                        <th scope="col">Data do Cadastro</th>
+                        <th scope="col">Data de nascimento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Fornecedor in FornecedorList track by $index">
+                        <td>{{Fornecedor.Nome}}</td>
+                        <td>{{Fornecedor.Documento}}</td>
+                        <td>{{Fornecedor.Telefone}}</td>
+                        <td>{{Fornecedor.RG}}</td>
+                        <td>{{Fornecedor.DtCadastro}}</td>
+                        <td>{{Fornecedor.DtNascimento}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarEmpresa">Cadastrar Empresa</button>
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarFornecedor">Cadastrar Fornecedor</button>
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalVincularEmpresaFornecedor">Cadastrar Fornecedor na Empresa</button>
     </div>
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarEmpresa">Cadastrar Empresa</button>
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalAdicionarFornecedor">Cadastrar Fornecedor</button>
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ModalVincularEmpresaFornecedor">Cadastrar Fornecedor na Empresa</button>
+</div>
 </div>
 
 <div class="modal fade" id="ModalVincularEmpresaFornecedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -115,17 +110,17 @@
                 <form>
                     <div class="form-group">
                         <label>Nome Fantasia</label>
-                        <input class="form-control" rows="3" placeholder="Nome Fantasia" ng-model="Empresa.NomeFantasia">
+                        <input class="form-control" rows="3" placeholder="Nome Fantasia" maxlength="200" ng-model="Empresa.NomeFantasia">
                     </div>
 
                     <div class="form-group">
                         <label>Estado</label>
-                        <input type="text" class="form-control" placeholder="SIGLA DO ESTADO" ng-model="Empresa.UF">
+                        <input type="text" class="form-control" placeholder="Sigla do Estado" maxlength="2" ng-model="Empresa.UF">
                     </div>
 
                     <div class="form-group">
                         <label>CNPJ</label>
-                        <input type="text" class="form-control" placeholder="CNPJ" ng-model="Empresa.CNPJ">
+                        <input type="text" class="form-control" placeholder="CNPJ" maxlength="14" ng-model="Empresa.CNPJ">
                     </div>
                 </form>
             </div>
@@ -151,12 +146,12 @@
                 <form>
                     <div class="form-group">
                         <label>Nome do Fornecedor</label>
-                        <input type="text" class="form-control" placeholder="Nome do Fornecedor" ng-model="Fornecedor.Nome">
+                        <input type="text" class="form-control" placeholder="Nome do Fornecedor" maxlength="200" ng-model="Fornecedor.Nome">
                     </div>
 
                     <div class="form-group">
                         <label>CPF/CNPJ</label>
-                        <input type="text" class="form-control" placeholder="Documento" ng-model="Fornecedor.Documento">
+                        <input type="text" class="form-control" placeholder="Documento" maxlength="14" ng-model="Fornecedor.Documento">
                     </div>
 
                     <div class="form-group">
@@ -166,17 +161,17 @@
 
                     <div class="form-group">
                         <label>Data de Nascimento</label>
-                        <input type="date" class="form-control" placeholder="Telefone" ng-model="Fornecedor.DtNascimento">
+                        <input type="date" class="form-control" ng-model="Fornecedor.DtNascimento">
                     </div>
 
                     <div class="form-group">
                         <label>Telefone</label>
-                        <input type="text" class="form-control" placeholder="Telefone" ng-model="Fornecedor.Telefone">
+                        <input type="text" class="form-control" placeholder="Telefone" maxlength="15" ng-model="Fornecedor.Telefone">
                     </div>
 
                     <div class="form-group">
                         <label>RG</label>
-                        <input type="text" class="form-control" placeholder="Telefone" ng-model="Fornecedor.RG">
+                        <input type="text" class="form-control" placeholder="Registro Geral" maxlength="15" ng-model="Fornecedor.RG">
                     </div>
 
                 </form>
