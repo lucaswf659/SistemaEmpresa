@@ -16,7 +16,7 @@ namespace SistemaNegocio
 
                 if(fornecedor.Documento.Length == 11)
                     if(fornecedor.RG == null || fornecedor.DtNascimento == DateTime.MinValue)
-                        throw new ApplicationException("Fornecedores PESSOA FÍSICA devem cadastrar obrigatoriamente o RG e a Data de nascimento.");
+                        throw new ArgumentException("Fornecedores PESSOA FÍSICA devem cadastrar obrigatoriamente o RG e a Data de nascimento.");
 
                 return FornecedorDD.CadastrarFornecedor(fornecedor);
             }

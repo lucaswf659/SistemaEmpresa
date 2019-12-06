@@ -60,12 +60,19 @@ namespace SistemaDados
                     SqlCommand command = new SqlCommand("[dbo].[buscar_lista_fornecedores]", connection);
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@idEmpresa", fornecedorFiltro.IdEmpresa == 0 ? fornecedorFiltro.IdEmpresa = 1 : fornecedorFiltro.IdEmpresa);
-                    //command.Parameters.AddWithValue("@nome", fornecedorFiltro.Nome ?? string.Empty);
-                    //command.Parameters.AddWithValue("@Documento", fornecedorFiltro.Documento ?? string.Empty);
-                    //command.Parameters.AddWithValue("@dt_cadastro", fornecedorFiltro.DtCadastro == null ? (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue : fornecedorFiltro.DtCadastro);
-                 
+                    command.Parameters.Add("@idEmpresa", SqlDbType.Int).Value = fornecedorFiltro.IdEmpresa == 0 ? fornecedorFiltro.IdEmpresa = 1 : fornecedorFiltro.IdEmpresa;
 
+                    if (!string.IsNullOrWhiteSpace(fornecedorFiltro.Nome))
+                        command.Parameters.Add("@nome", SqlDbType.NVarChar).Value = fornecedorFiltro.Nome;
+
+                    if (!(fornecedorFiltro.DtCadastro == DateTime.MinValue))
+                        command.Parameters.Add("@dt_cadastro", SqlDbType.DateTime).Value = fornecedorFiltro.DtCadastro;
+
+                    if (!string.IsNullOrWhiteSpace(fornecedorFiltro.Documento))
+                        command.Parameters.Add("@Documento", SqlDbType.NVarChar).Value = fornecedorFiltro.Documento;
+
+                   
+                 
                     connection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -74,7 +81,7 @@ namespace SistemaDados
                         if (reader.HasRows)
                         {
                             while (reader.Read())
-                            {
+                            { 
                                 Fornecedor fornecedor = new Fornecedor()
                                 {
                                     Nome = reader.IsDBNull(0) ? null : reader.GetString(0),
@@ -82,18 +89,21 @@ namespace SistemaDados
                                     RG = reader.IsDBNull(2) ? null : reader.GetString(2),
                                     DtCadastro = reader.IsDBNull(3) ? DateTime.MinValue : reader.GetDateTime(3),
                                     DtNascimento = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4),
-                                    Telefone = reader.IsDBNull(5) ? null : reader.GetString(5)
-                                };
-
+                                    Telefone = reader.IsDBNull(5) ? null : reader.GetString(5),
+                                    empresa = EmpresaDD.BuscarEmpresa(fornecedorFiltro.IdEmpresa)
+                            };
                                 listaFornecedores.Add(fornecedor);
                             }
                         }
                         else
                         {
-                           throw new ApplicationException("Não foram encontrados dados válidos");
+                            throw new ApplicationException("Não foram encontrados dados válidos");
                         }
                     }
                 }
+
+               
+
 
                 return listaFornecedores;
             }
@@ -138,7 +148,7 @@ namespace SistemaDados
                         }
                         else
                         {
-                           throw new ApplicationException("Fornecedor não encontrado.");
+                            throw new ApplicationException("Fornecedor não encontrado.");
                         }
                     }
                 }

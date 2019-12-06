@@ -4,6 +4,7 @@ namespace SistemaModelos
 {
     public class Fornecedor
     {
+        public Empresa empresa { get; set; }
         public string Nome { get; set; }
         public string Documento { get; set; }
         public string RG { get; set; }

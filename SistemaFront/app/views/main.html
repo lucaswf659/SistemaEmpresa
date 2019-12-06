@@ -4,38 +4,38 @@
         <div class="panel panel-default">
             <h1 class="text-center">Sistema Empresa Fornecedor</h1>
             <br />
+     
             <div>
-                <row>
-                    <label>Código da empresa</label>
-                    <input type="text" class="col-md-3" placeholder="Informe o código da empresa" ng-model="Empresa.IdEmpresa">
-                    <button type="button" class="btn btn-outline-dark" ng-click="BuscarEmpresa()">Buscar Empresa</button>
-                </row>
-            </div>
-
-            <br />
-          
-            <div>
-                <!--<div>
+                <div>
+                    <row>
+                        <label>Código da empresa</label>
+                        <input type="text" class="col-md-3" placeholder="Informe o código da empresa" ng-model="FornecedorFiltro.IdEmpresa">
+                        <!--<button type="button" class="btn btn-outline-dark" >Buscar Empresa</button>-->
+                    </row>
+                </div>
+                <div>
                     <row>
                         <label>Nome</label>
-                        <input type="text" class="col-md-3" placeholder="Nome do fornecedor">
+                        <input type="text" class="col-md-3" placeholder="Nome do fornecedor" ng-model="FornecedorFiltro.Nome">
                     </row>
                 </div>
                 <div>
                     <row>
                         <label>CPF/CNPJ</label>
-                        <input type="text" class="col-md-3" placeholder="Informe o código da empresa">
+                        <input type="text" class="col-md-3" placeholder="CPF ou CNPJ" ng-model="FornecedorFiltro.Documento">
                     </row>
                 </div>
 
                 <div>
                     <row>
                         <label>Data de Cadastro</label>
-                        <input type="date" class="col-md-3" placeholder="Informe o código da empresa">
+                        <input type="date" class="col-md-3" placeholder="Informe o código da empresa" ng-model="FornecedorFiltro.DtCadastro">
                     </row>
-                </div>-->
-                <!--<button type="button" class="btn btn-outline-dark" ng-click="">Filtrar Fornecedor</button>-->
-
+                </div>
+                <button type="button" class="btn btn-outline-dark" ng-click="BuscarFornecedorListFiltrado()">Filtrar Fornecedor</button>
+                <br />
+                <br />
+                <br />
                 <h1>{{Empresa.NomeFantasia}}</h1>
                 <br />
                 <table class="table col-md-12">

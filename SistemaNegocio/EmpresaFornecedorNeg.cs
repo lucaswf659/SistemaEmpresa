@@ -15,16 +15,16 @@ namespace SistemaNegocio
                 if (empresa == null)
                     throw new ApplicationException("Empresa não encontrada.");
                 if (empresa.UF == null)
-                    throw new ApplicationException("UF da empresa não cadastrada.");
+                    throw new ArgumentException("UF da empresa não cadastrada.");
 
                 Fornecedor fornecedor = FornecedorNeg.BuscarFornecedor(empresaFornecedor.IdFornecedor);
 
                 if (fornecedor == null)
                     throw new ApplicationException("Fornecedor não encontrado.");
                 if (fornecedor.Documento == null)
-                    throw new ApplicationException("Documento do fornecedor não foi cadastrado.");
+                    throw new ArgumentException("Documento do fornecedor não foi cadastrado.");
                 if (fornecedor.DtNascimento == null)
-                    throw new ApplicationException("Data de nascimento do fornecedor não foi cadastrado.");
+                    throw new ArgumentException("Data de nascimento do fornecedor não foi cadastrado.");
 
                 if (empresa.UF == "PR") 
                     if (fornecedor.Documento.Length == 11) 

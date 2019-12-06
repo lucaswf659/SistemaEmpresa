@@ -22,7 +22,7 @@ function SistemaCtrl($scope, SistemaService)
             IdEmpresa: 0,
             Nome: '',
             Documento: '',
-            DtCadastro: Date
+            DtCadastro: undefined
         }
 
         $scope.FornecedorList = [];
@@ -69,11 +69,11 @@ function SistemaCtrl($scope, SistemaService)
             });
     };
 
-    function BuscarFornecedorList() {
-        SistemaService.BuscarFornecedorList($scope.Empresa)
+    $scope.BuscarFornecedorListFiltrado = function() {
+        SistemaService.BuscarFornecedorList($scope.FornecedorFiltro)
             .then(function (responseSucess) {
                 $scope.FornecedorList = responseSucess.data;
-
+                $scope.Empresa.NomeFantasia = responseSucess.data[0].empresa.NomeFantasia;
                 $scope.FornecedorList.forEach(function (item) {
                     item.DtCadastro = formatDate(item.DtCadastro);
                     if (item.DtCadastro == '1/1/1')
@@ -82,9 +82,29 @@ function SistemaCtrl($scope, SistemaService)
                     if (item.DtNascimento == '1/1/1')
                         item.DtNascimento = undefined;
                 });
-
+                //toastr.success('Hello world!', 'Toastr fun!');
             }, function (errorResponse) {
+                //toastr.error('Your credentials are gone', 'Error');
+                var error = errorResponse.message;
+            });
+    };
 
+    function BuscarFornecedorList() {
+        SistemaService.BuscarFornecedorList($scope.Empresa)
+            .then(function (responseSucess) {
+                $scope.FornecedorList = responseSucess.data;
+                $scope.Empresa.NomeFantasia = responseSucess.data[0].empresa.NomeFantasia;
+                $scope.FornecedorList.forEach(function (item) {
+                    item.DtCadastro = formatDate(item.DtCadastro);
+                    if (item.DtCadastro == '1/1/1')
+                        item.DtCadastro = undefined;
+                    item.DtNascimento = formatDate(item.DtNascimento);
+                    if (item.DtNascimento == '1/1/1')
+                        item.DtNascimento = undefined;
+                });
+                //toastr.success('Hello world!', 'Toastr fun!');
+            }, function (errorResponse) {
+                //toastr.error('Your credentials are gone', 'Error');
                 var error = errorResponse.message;
             });
     };

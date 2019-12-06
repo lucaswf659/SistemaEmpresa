@@ -57,8 +57,7 @@ namespace SistemaDados
                     SqlCommand command = new SqlCommand("[dbo].[buscar_empresa]", connection);
                     command.CommandType = CommandType.StoredProcedure;
 
-
-                    command.Parameters.AddWithValue("@idEmpresa", idEmpresa == 0 ? idEmpresa = 1 : idEmpresa);
+                    command.Parameters.Add("@idEmpresa", SqlDbType.Int).Value = idEmpresa == 0 ? idEmpresa = 1 : idEmpresa;
 
                     connection.Open();
 
