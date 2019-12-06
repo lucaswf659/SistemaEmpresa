@@ -15,6 +15,14 @@ Na opção da Solution, ir na opção "Definir projeto de inicialização" e sel
 Clicar em "Iniciar" ou F5 para inicializar o projeto.
 No projeto "SistemaDados", alterar a string de conexão de todos os métodos (o ideal é deixar essa configuração em Settings.Properties do projeto, será alterado futuramente). A string de conexão é obtida no SQL Server. 
 
+### Melhorias
+
+* Fazer um layout mais bonito
+* Colocar validações/máscaras em todos os campos
+* Implementar exclusão de empresas e fornecedores
+* Fazer paginação para mais registros
+* Implementar o vínculo entre empresa/fornecedor de forma mais intuitiva
+
 ### Tecnologias
 
 * AngularJS
