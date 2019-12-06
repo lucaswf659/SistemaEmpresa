@@ -17,11 +17,11 @@ No projeto "SistemaDados", alterar a string de conexão de todos os métodos (o 
 
 ### Melhorias
 
-* Fazer um layout mais bonito
-* Colocar validações/máscaras em todos os campos
-* Implementar exclusão de empresas e fornecedores
-* Fazer paginação para mais registros
-* Implementar o vínculo entre empresa/fornecedor de forma mais intuitiva
+* Criar um layout mais agradável
+* Validações/máscaras em todos os campos
+* Exclusão de empresas e fornecedores
+* Paginação para mais registros
+* Vínculo entre empresa/fornecedor de forma mais intuitiva
 
 ### Tecnologias
 
